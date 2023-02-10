@@ -1,5 +1,7 @@
 {% extends 'default.html' %}
 
+{% load news_filters %}
+
 <!-- Название у нас будет Product -->
 {% block title %}
 Product
@@ -10,7 +12,7 @@ Product
 <br><br><br>
 <h2>Категория: {{ post.category.name }}</h2>
 <br><br>
-<h1>{{ post.heading }}</h1>
+<h1>{{ post.heading|censored }}</h1>
 <br>
 <h2>Автор: {{ post.author.authorUser }}</h2>
 <h2>Дата: {{ post.date}} </h2>
