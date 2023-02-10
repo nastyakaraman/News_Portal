@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+<!-- Название у нас будет Product -->
+{% block title %}
+Product
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+<br><br><br>
+<h2>Категория: {{ post.category.name }}</h2>
+<br><br>
+<h1>{{ post.heading }}</h1>
+<br>
+<h2>Автор: {{ post.author.authorUser }}</h2>
+<h2>Дата: {{ post.date}} </h2>
+<br><br>
+<h3>{{ post.text }}<br></h3>
+<br>
+{% endblock content %}
