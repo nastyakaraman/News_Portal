@@ -1,14 +1,70 @@
 {% extends 'default.html' %}
 
 {% load news_filters %}
+{% load news_tags %}
+
 
 {% block title %}
 Posts
 {% endblock title %}
 
 {% block content %}
+   <br>
+   <h3>Фильтр</h3>
+   <br>
+   <form action="" method="get" >
+
+       <label for="{{ filterset.form.heading__contains.id }}">По ключевому слову:</label>
+       <input
+               id="{{ filterset.form.heading__contains.id }}"
+               name="heading__contains"
+               value=""
+       >
+
+       <br><br>
+       <label for="id_category__choice">По категории:</label>
+       <select
+                   name="category__choice"
+                   id="id_category__choice" multiple="">
+                   <option value="1">Политика</option>
+                   <option value="2">Cпорт</option>
+                   <option value="3">Культура</option>
+                   <option value="4">Экономика</option>
+                   <option value="5">Россия</option>
+                   <option value="6">Мир</option>
+       </select>
+       <input type="reset" value="Сбросить">
+       <br><br>
+
+
+       <label for="{{ filterset.form.time_in__range.id }}">По дате выхода поста:</label>
+       <input
+               type="datetime-local"
+               id="{{ filterset.form.time_in__range.id }}"
+               name="time_in__range_min"
+               value="{{ filterset.form.time_in__range.value }}"
+       >
+
+       <label for="{{ filterset.form.time_in__range.id }}"> - </label>
+       <input
+               type="datetime-local"
+               id="{{ filterset.form.time_in__range.id }}"
+               name="time_in__range_max"
+               value="{{ filterset.form.time_in__range.value }}"
+       >
+       <br><br>
+
+       <input type="submit" class="mt-3 btn-primary" value="Применить" />
+
+       <form action="/posts/.html" >
+             <button>Сбросить фильтры</button>
+       </form>
+
+   </form>
+
+   <br><br>
    <h1>Все статьи</h1>
-   <hr>
+   <br>
    {% if posts %}
       {% for post in posts %}
           <h2>{{ post.heading|censored }}</h2>
@@ -21,4 +77,25 @@ Posts
    {% else %}
       <h2>Новостей нет!</h2>
    {% endif %}
+
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
 {% endblock content %}
