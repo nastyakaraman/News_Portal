@@ -9,8 +9,28 @@ Product
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
-<br><br><br>
-<h2>Категория: {{ post.category.name }}</h2>
+    <br>
+    <p align="right">
+        {% if post.type == 'N' %}
+        <a class="btn btn-outline-secondary"
+           href="{% url 'news_update' post.id %}">Редактировать</a>
+        <a class="btn btn-outline-secondary"
+           href="{% url 'news_delete' post.id %}">Удалить</a>
+        {% else %}
+        <a class="btn btn-outline-secondary"
+           href="{% url 'article_update' post.id %}">Редактировать</a>
+        <a class="btn btn-outline-secondary"
+           href="{% url 'article_delete' post.id %}">Удалить</a>
+        {% endif %}
+    <br><br>
+
+    <h2>Тип: {{ post.type }}</h2>
+    <br>
+    <h2>Категории:
+    {% for post in post.category.all %}
+       {{ post.name }}
+    {% endfor %}
+    </h2>
 <br><br>
 <h1>{{ post.heading|censored }}</h1>
 <br>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 from datetime import datetime
 
 # Create your models here.
@@ -21,14 +22,14 @@ class Author (models.Model):
         self.arating = post_rate*3 + com_rate
         self.save()
 
-
-
 class Category (models.Model):
+
     name = models.CharField(max_length=255, unique=True)
     def __str__(self):
         return self.name
 
 class Post (models.Model):
+
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     article = 'A'
@@ -74,6 +75,12 @@ class Post (models.Model):
     def preview (self):
         prev = self.text[0:123]+'...'
         return prev
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+
+    def categories(self):
+        return(list(self.category))
 
 
 class PostCategory(models.Model):

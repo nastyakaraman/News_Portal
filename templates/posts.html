@@ -10,6 +10,19 @@ Posts
 
 {% block content %}
    <br>
+   <p align="right">
+   <button
+           type="button"
+           onclick="window.location.href = 'articles/create/';"
+           class="btn btn-outline-secondary">Создать статью
+   </button>
+
+   <button
+           type="button"
+           onclick="window.location.href = 'news/create/';"
+           class="btn btn-outline-secondary">Создать новость
+   </button></p>
+
    <h3>Фильтр</h3>
    <br>
    <form action="" method="get" >
@@ -54,7 +67,7 @@ Posts
        >
        <br><br>
 
-       <input type="submit" class="mt-3 btn-primary" value="Применить" />
+       <input type="submit" class="btn btn-success" value="Применить" />
 
        <form action="/posts/.html" >
              <button>Сбросить фильтры</button>
@@ -62,20 +75,25 @@ Posts
 
    </form>
 
+
    <br><br>
-   <h1>Все статьи</h1>
+   <h1>Все посты</h1>
    <br>
    {% if posts %}
       {% for post in posts %}
           <h2>{{ post.heading|censored }}</h2>
-          <h3>Автор: {{ post.author.authorUser }}</h3>
+          <p align="left">
+          <h3>Автор: {{ post.author.authorUser }}</h3></p>
           <h3>Дата: {{ post.date}} Время: {{ post.time}}</h3>
           <br>
           <h4>{{ post.text|truncatechars:20}}<br></h4>
           <br>
+          <a class="btn btn-outline-success"
+             href="{% url 'post_detail' post.id %}">Просмотреть</a>
+          <br><br>
       {% endfor %}
    {% else %}
-      <h2>Новостей нет!</h2>
+      <h2>Постов нет!</h2>
    {% endif %}
 
    {% if page_obj.has_previous %}
