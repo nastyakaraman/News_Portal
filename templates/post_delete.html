@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+
+{% block content %}
+<br>
+<h1>Удаление поста </h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <h3>Удаляем пост "{{ object.heading }}" автора {{ object.author.authorUser }}?</h3>
+    <br>
+    <input type="submit" class="btn btn-success" value="Удалить" />
+</form>
+{% endblock content %}
