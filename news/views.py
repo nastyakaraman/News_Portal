@@ -3,6 +3,7 @@ from .models import Post
 from .filters import ProductFilter
 from .forms import PostForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PostsList(ListView):
     model = Post
@@ -31,7 +32,8 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 # представление для создания поста
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
@@ -39,7 +41,8 @@ class NewsCreate(CreateView):
         post = form.save(commit=False)
         post.type = 'N'
         return super().form_valid(form)
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'article_edit.html'
