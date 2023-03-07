@@ -52,21 +52,25 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 # представление для редактирования поста
-class NewsUpdate(UpdateView):
+class NewsUpdate(LoginRequiredMixin,UpdateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
 
-class ArticleUpdate(UpdateView):
+class ArticleUpdate(LoginRequiredMixin,UpdateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'article_edit.html'
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin,DeleteView):
+    raise_exception = True
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(LoginRequiredMixin,DeleteView):
+    raise_exception = True
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
