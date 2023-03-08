@@ -9,8 +9,9 @@ Posts
 {% endblock title %}
 
 {% block content %}
-   <br>
-   <p align="right">
+    <br>
+    {% if perms.news.add_post %}
+    <p align="right">
    <button
            type="button"
            onclick="window.location.href = 'articles/create/';"
@@ -22,6 +23,7 @@ Posts
            onclick="window.location.href = 'news/create/';"
            class="btn btn-outline-secondary">Создать новость
    </button></p>
+   {% endif %}
 
    <h3>Фильтр</h3>
    <br>

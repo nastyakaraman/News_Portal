@@ -10,6 +10,7 @@ Product
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
     <br>
+    {% if perms.news.add_post %}
     <p align="right">
         {% if post.type == 'N' %}
         <a class="btn btn-outline-secondary"
@@ -22,6 +23,7 @@ Product
         <a class="btn btn-outline-secondary"
            href="{% url 'article_delete' post.id %}">Удалить</a>
         {% endif %}
+    {% endif %}
     <br><br>
 
     <h2>Тип: {{ post.type }}</h2>
