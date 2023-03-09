@@ -138,10 +138,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 LOGIN_REDIRECT_URL = "/posts"
+LOGOUT_REDIRECT_URL = "/posts"
 
 #надо выяснить, что это за переменная
 SITE_ID = 1
-
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
