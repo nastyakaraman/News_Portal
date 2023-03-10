@@ -10,12 +10,17 @@ Posts
 
 {% block content %}
     <br>
+    {% if request.user.is_authenticated %}
     <a class="btn btn-outline-secondary"
-           href="{% url 'account_signup' %}">Зарегистрироваться</a>
+           href="{% url 'account_logout' %}">Выйти</a>
+    {% else %}
     <a class="btn btn-outline-secondary"
            href="{% url 'account_login' %}">Войти</a>
     <a class="btn btn-outline-secondary"
-           href="{% url 'account_logout' %}">Выйти</a>
+           href="{% url 'account_signup' %}">Зарегистрироваться</a>
+    {% endif %}
+
+
     <br><br><br>
     {% if perms.news.add_post %}
     <p align="right">
