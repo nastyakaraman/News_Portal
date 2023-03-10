@@ -9,10 +9,9 @@ Posts
 {% endblock title %}
 
 {% block content %}
-
     <br>
     <a class="btn btn-outline-secondary"
-           href="{% url 'signup' %}">Зарегистрироваться</a>
+           href="{% url 'account_signup' %}">Зарегистрироваться</a>
     <br><br><br>
     {% if perms.news.add_post %}
     <p align="right">
