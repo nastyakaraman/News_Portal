@@ -12,6 +12,10 @@ Posts
     <br>
     <a class="btn btn-outline-secondary"
            href="{% url 'account_signup' %}">Зарегистрироваться</a>
+    <a class="btn btn-outline-secondary"
+           href="{% url 'account_login' %}">Войти</a>
+    <a class="btn btn-outline-secondary"
+           href="{% url 'account_logout' %}">Выйти</a>
     <br><br><br>
     {% if perms.news.add_post %}
     <p align="right">
