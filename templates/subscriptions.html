@@ -5,6 +5,10 @@
 {% endblock title %}
 
 {% block content %}
+    <br>
+    <a class="btn btn-outline-success"
+        href="{% url 'posts_list' %}">Посты</a>
+    <br><br>
     {% for category in categories  %}
         <p>
             {{ category.name }}

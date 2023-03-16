@@ -153,12 +153,12 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 14
 
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+'''EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "anastaciakaraman@yandex.ru"
 EMAIL_HOST_PASSWORD = "hvicsvrkisqfswtk"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
-DEFAULT_FROM_EMAIL = "anastaciakaraman@yandex.ru"
+DEFAULT_FROM_EMAIL = "anastaciakaraman@yandex.ru"'''
