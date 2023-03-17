@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Привет! Новые статьи за последнюю неделю:</title>
+</head>
+<body>
+{% for post in posts %}
+    <h3>{{ post.heading}}</h3>
+    <br>
+    <h4>{{ post.preview }}</h4>
+    <br>
+{% endfor %}
+</body>
+</html>
