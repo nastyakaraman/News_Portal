@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Привет! Новые статьи за последнюю неделю:</title>
+    <title>Привет! Новые статьи в твоих любимых категориях за последнюю неделю:</title>
 </head>
 <body>
 {% for post in posts %}
+    {% if post.category.
     <h3>{{ post.heading}}</h3>
     <br>
     <h4>{{ post.preview }}</h4>
