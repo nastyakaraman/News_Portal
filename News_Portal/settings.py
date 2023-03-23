@@ -163,3 +163,9 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = "anastaciakaraman@yandex.ru"
+
+CELERY_BROKER_URL = 'redis://default:561630n@redis-17717.c299.asia-northeast1-1.gce.cloud.redislabs.com:17717'
+CELERY_RESULT_BACKEND = 'redis://default:561630n@redis-17717.c299.asia-northeast1-1.gce.cloud.redislabs.com:17717'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

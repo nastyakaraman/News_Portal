@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.db.models import Exists, OuterRef
 from django.shortcuts import render
 
+from .tasks import send_newarticle
+
 
 class PostsList(ListView):
     model = Post
@@ -38,7 +40,7 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 # представление для создания поста
-class NewsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class NewsCreate (LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ('news.add_post',)
     raise_exception = True
     form_class = PostForm
@@ -47,8 +49,13 @@ class NewsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.type = 'N'
+        post.save()
+        send_newarticle.delay(post.pk)
         return super().form_valid(form)
-class ArticleCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+
+
+
+class ArticleCreate (LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ('news.add_post',)
     raise_exception = True
     form_class = PostForm
@@ -57,6 +64,7 @@ class ArticleCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.type = 'A'
+        send_newarticle.apply_async(oid=post.pk, countdown = 30)
         return super().form_valid(form)
 
 # представление для редактирования поста
