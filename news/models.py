@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.urls import reverse
 from datetime import datetime
+from django.core.cache import cache
+
 
 # Create your models here.
 
@@ -83,6 +85,9 @@ class Post (models.Model):
     def categories(self):
         return(list(self.category))
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete(f'product-{self.pk}')
 
 class PostCategory(models.Model):
 

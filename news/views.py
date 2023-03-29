@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.db.models import Exists, OuterRef
 from django.shortcuts import render
 
+from django.core.cache import cache
 
 class PostsList(ListView):
     model = Post
@@ -36,6 +37,15 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'product-{self.kwargs["pk"]}',
+                        None)
+        # если объекта нет в кэше, то получаем его и записываем в кэш
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'product-{self.kwargs["pk"]}', obj)
+        return obj
 
 # представление для создания поста
 class NewsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
