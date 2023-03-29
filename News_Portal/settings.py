@@ -163,3 +163,10 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = "anastaciakaraman@yandex.ru"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+    }
+}
